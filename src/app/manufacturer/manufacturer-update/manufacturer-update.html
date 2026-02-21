@@ -1,0 +1,73 @@
+
+<p class="searchTitle">&nbsp;&nbsp;Manufacturer Interface: Update Manufacturer</p>
+
+<div *ngIf="errorMessages.length">
+    <ul style="color: red;">
+        <li *ngFor="let err of errorMessages">
+            {{ err }}
+        </li>
+    </ul>
+</div>
+
+<form [formGroup]="manufacturerForm" (ngSubmit)="updateManufacturer()" novalidate>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Manufacturer Name:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="mfgName"/></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Address 1:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="address1" /></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Address 2:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="address2" /></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>City:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="city" maxlength="50" /></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>State:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="state" maxlength="2"/></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Zip:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="zip" maxlength="5" /></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Zip Ext:</b></td>
+			<td width="30%" align="left"><input type="text" formControlName="zipExt" maxlength="4"/></td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>		
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+				<input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsManufacturerSubmit('/manufacturer')" />
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+	<!-- Hidden ID -->
+    <input type="hidden" formControlName="manufacturerId" />
+</form>

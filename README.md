@@ -1,59 +1,32 @@
-# ILabs
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This is a personal project developed to demonstrate Angular architecture integrated with microservices-based and Python-based AI API service design.
+ 
+Project 1: AI Agent - Angular, Spring Boot, Microservice, Python API AI Application
+Designed and implemented an AI Agent system using Spring Boot microservices integrated with a Python-based AI API service.
+The platform processes large PDF documents.
+Performs GMP regulatory compliance analysis using Ollama/OpenAI models.
+Generates automated batch records, compliance results and audit reports through RESTful communication.
+Created regulatory compliance audit dashboard.
+ 
+Project 2: Angular Microservices Application
+The application communicates with five independent microservices:
+User Service – Manages user accounts and authentication.
+Product Service – Handles product information and catalog.
+Manufacturer Service – Maintains manufacturer details.
+Order Quantity Service – Manages orders and quantities.
+AI Agent Service – Maintains AI agent details..
+ 
+Technologies:
+Java / Spring MVC, Spring Boot, Junit, Mokito unit tests, SonarQube, Jacoco, Actuator, Grafana, jMeter, VisualVM
+AWS EC2, ECR, ECS, EKS, Load balancer, Lambda.
+MySQL, MongoDB, Redis Caching
+Apache Kafka not deployed due to budget concern. Need to pay more money for EC2 instance. Project was implement and moved into github repository as enterprise-products.git.
+Implemented CI/CD pipe lines using Maven, Jenkins, Docker, HelmCharts, ArgoCd, K8S (Installed minikube).
+Use the Eclipse and VS Code IDE. Integrated GitHub Copilot.
+Implemented JWT token for authentication and authorization. JWT token to communicate between the microservices. Like MVC to microservice and microservice to microservice.
+Implemented server-side pagination for the manufacturer and product search feature. Integrated query parameters (page, size, sort) with microservice REST API calls.
+ 
+User Roles:
+The system supports three main roles:
+Admin – Full access to manage users, products, manufacturers and orders.
+User – Can browse products, manufacturers and place orders.
+View – Read-only access for viewing data.

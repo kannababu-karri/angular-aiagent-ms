@@ -6,23 +6,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './services/auth.service';
-import { ManufacturerService } from './services/manufacturer.service';
 import { routes } from './app.routes';
 
 @NgModule({
   imports: [
     BrowserModule,
-    HttpClientModule,          // ✅ must be imported
+    HttpClientModule,         
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    AppComponent,              // ✅ standalone components can go here
+    AppComponent,              
     LoginComponent
   ],
-  providers: [
-    AuthService,
-    ManufacturerService
-  ],
-  bootstrap: [AppComponent]
+  providers: []
 })
 export class AppModule {}

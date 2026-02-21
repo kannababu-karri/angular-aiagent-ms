@@ -1,0 +1,60 @@
+<p class="searchTitle">&nbsp;&nbsp;Product Interface: Update Product</p>
+
+<form [formGroup]="orderqtyForm" (ngSubmit)="updateOrderqty()" novalidate>
+	<div *ngIf="errorMessages.length">
+		<ul style="color: red;">
+			<li *ngFor="let err of errorMessages">
+				{{ err }}
+			</li>
+		</ul>
+	</div>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+        <tr>
+            <td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Manufacturer Name:</b></td>
+			<td width="30%" align="left">{{ orderqty.manufacturer?.mfgName }}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Name:</b></td>
+			<td width="30%" align="left">{{ orderqty.product?.productName }}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Description:</b></td>
+			<td width="30%" align="left">{{ orderqty.product?.productDescription }}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Cas Number:</b></td>
+			<td width="30%" align="left">{{ orderqty.product?.casNumber }}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Quantity:</b></td>
+            <td width="30%" align="left">
+				<input type="text" formControlName="quantity" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>				
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+				<input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsOrderqtySubmit('/orderqty')" />
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+    <input type="hidden" formControlName="orderId" />
+</form>

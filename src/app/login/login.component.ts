@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-login.component',
@@ -34,10 +35,13 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-      
       console.log('Login submitted:', credentials);
+
+      const apiUserUrl = this.http.get(`${environment.apiUser}/validate/user`);
+      console.log('apiUserUrl details:', apiUserUrl);
+
       this.http.get<any>(
-            'http://localhost:8090/api/user/validate/user',
+            `${environment.apiUser}/validate/user`,
             {
               params: {
                 username: credentials.userName,

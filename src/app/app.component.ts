@@ -13,11 +13,4 @@ import { AuthService } from './services/auth.service';
     <router-outlet></router-outlet>
   `
 })
-export class AppComponent implements OnInit {
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.loadUser();
-  }
-}
+export class AppComponent { }

@@ -1,0 +1,80 @@
+<p class="searchTitle">&nbsp;&nbsp;Manufacturer Interface: Home</p>
+
+<div *ngIf="errorMessage" class="error-msg" style="color:red;">
+    &nbsp;&nbsp;<b>{{ errorMessage }}</b>
+</div>
+
+<div *ngIf="successMessage" style="color: green;">
+    &nbsp;&nbsp;<b>{{ successMessage }}</b>
+</div>
+
+<p>&nbsp;&nbsp;
+    <input *ngIf="isAdminUser" type="button" value="Add Manufacturer" (click)="addManufacturer('/manufacturer/add')" />&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="addManufacturer('/login-home')" />
+</p>
+
+<form [formGroup]="manufacturerForm" (ngSubmit)="searchManufacturer()">
+    <table width="100%">			
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Manufacturer Name:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="mfgName" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>		
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td align="center" colspan="2" width="50%">
+                <input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="addManufacturer('/login-home')" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>				
+        <tr>
+            <td width="100%" colspan="4"><hr /></td>
+        </tr>	
+    </table>
+    <!-- Display search results -->
+    <p class="searchTitle">&nbsp;&nbsp;Manufacturer Search Results:</p>
+    <table *ngIf="manufacturers.length > 0" class="searchDetail">
+        <tr>				
+            <th>Manufacturer name</th>
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Zip Ext</th>
+            <th *ngIf="isAdminUser">Update</th>
+            <th *ngIf="isAdminUser">Delete</th>						
+        </tr>
+        <tr *ngFor="let m of manufacturers" class="detailData">
+            <td class="center">{{ m.mfgName }}</td>
+            <td class="leftNoBold">{{ m.address1 }}</td>
+            <td class="leftNoBold">{{ m.address2 }}</td>
+            <td class="leftNoBold">{{ m.city }}</td>
+            <td class="leftNoBold">{{ m.state }}</td>
+            <td class="leftNoBold">{{ m.zip }}</td>
+            <td class="leftNoBold">{{ m.zipExt }}</td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Update" (click)="updateManufacturer(m.manufacturerId)" />
+            </td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Delete" (click)="deleteManufacturer(m.manufacturerId)" />
+            </td>
+        </tr>  
+        <!-- Pagination controls -->
+        <div class="pagination" style="margin-top:10px;">
+            <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+            <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+            <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+        </div>
+    </table>
+    <div *ngIf="manufacturers.length === 0">
+        <p class="searchTitle">&nbsp;&nbsp;No manufacturers are found.</p>
+    </div>
+</form>

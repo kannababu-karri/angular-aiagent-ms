@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { JwtPayload } from '../models/jwt-payload.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,14 @@ export class AuthService {
   getUser(): any {
     const user = sessionStorage.getItem('loggedInUser');
     return user ? JSON.parse(user) : null;
+  }
+
+  getUserId(): number {
+    const userStr = sessionStorage.getItem('loggedInUser');
+    if (!userStr) return 0;
+    const user = JSON.parse(userStr);
+    console.log('getUserId() - user object:', user);
+    return user?.userId ?? null;
   }
 
   loadUser() {
@@ -47,38 +57,95 @@ export class AuthService {
   }
 
   getRoles(): string[] {
-    //const token = localStorage.getItem('token');
-    const token = this.getToken();
-    if (!token) return [];
+    try {
+      const token = this.getToken();
+      if (!token) return [];
+      
+      const payload = jwtDecode<JwtPayload>(token);
+      console.log('Decoded token payload:', payload);
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.roles || [];
+      const roles: string[] = payload.roles || [];
+      console.log('Decoded token payload roles:', roles);
+
+      return roles
+
+    } catch (error) {
+      console.error('Token decode failed in getRoles():', error);
+      return [];
+    }
   }
 
   hasRole(role: string): boolean {
     return this.getRoles().includes(role);
   }
 
-
   isAdmin(): boolean {
-    const token = this.getToken();
-    if (!token) return false;
-    // Optional: decode JWT and check role, e.g., using jwt-decode library
-    return token.includes('admin'); // simple example
+    try {
+      const token = this.getToken();
+      if (!token) return false;
+      
+      const payload = jwtDecode<JwtPayload>(token);
+      console.log('Decoded token payload:', payload);
+
+      const roles: string[] = payload.roles || [];
+      console.log('Decoded token payload roles:', roles);
+
+      return roles.map(r => r.toLowerCase()).includes('admin');
+
+    } catch (error) {
+      console.error('Token decode failed in isAdmin():', error);
+      return false;
+    }
   }
 
   isUser(): boolean {
-    const token = this.getToken();
-    if (!token) return false;
-    // Optional: decode JWT and check role, e.g., using jwt-decode library
-    return token.includes('user'); // simple example
+   try {
+      const token = this.getToken();
+      if (!token) return false;
+      
+      const payload = jwtDecode<JwtPayload>(token);
+      console.log('Decoded token payload:', payload);
+
+      const roles: string[] = payload.roles || [];
+      console.log('Decoded token payload roles:', roles);
+
+      return roles.map(r => r.toLowerCase()).includes('user');
+
+    } catch (error) {
+      console.error('Token decode failed in isUser():', error);
+      return false;
+    }
   }
 
 
   isView(): boolean {
-     const token = this.getToken();
-    if (!token) return false;
-    // Optional: decode JWT and check role, e.g., using jwt-decode library
-    return token.includes('view'); // simple example
+   try {
+      const token = this.getToken();
+      if (!token) return false;
+      
+      const payload = jwtDecode<JwtPayload>(token);
+      console.log('Decoded token payload:', payload);
+
+      const roles: string[] = payload.roles || [];
+      console.log('Decoded token payload roles:', roles);
+
+      return roles.map(r => r.toLowerCase()).includes('view');
+
+    } catch (error) {
+      console.error('Token decode failed in isView():', error);
+      return false;
+    }
   }
+
+  isTokenValid(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    
+    const payload: any = jwtDecode(token);
+
+    if (!payload.exp) return false;
+
+    return Date.now() < payload.exp * 1000;
+  }
+
 }

@@ -1,0 +1,61 @@
+<p class="searchTitle">&nbsp;&nbsp;Order Interface: Add New Order</p>
+
+<form [formGroup]="orderqtyForm" (ngSubmit)="saveNewOrderqty()" novalidate>
+	<div *ngIf="errorMessages.length">
+		<ul style="color: red;">
+			<li *ngFor="let err of errorMessages">
+				{{ err }}
+			</li>
+		</ul>
+	</div>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+        <tr>
+            <td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Manufacturer Name:</b></td>
+			<td width="30%" align="left">
+                <div formGroupName="manufacturer">
+                    <select formControlName="manufacturerId" class="form-control">
+                        <option value="0">Choose one...</option>
+                        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.manufacturerId">{{ manufacturer.mfgName }}</option>
+                    </select>	
+                </div>
+			</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Description:</b></td>
+			<td width="30%" align="left">
+                <div formGroupName="product">
+                    <select formControlName="productId" class="form-control">
+                        <option value="0">Choose one...</option>
+                        <option *ngFor="let product of products" [value]="product.productId">{{ product.productName }} - {{ product.casNumber }}</option>
+                    </select>
+                </div>	
+			</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Quantity:</b></td>
+            <td width="30%" align="left">
+				<input type="text" formControlName="quantity" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>				
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+				<input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsOrderqtySubmit('/orderqty')" />
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+</form>

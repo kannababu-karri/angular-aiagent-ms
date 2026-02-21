@@ -1,58 +1,70 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PageResponseDto } from '../models/pageresponsedto.model';
 import { Manufacturer } from '../models/manufacturer.model';
+import { environment } from '../../environments/environment.prod';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ManufacturerService {
+    private baseUrl = `${environment.apiManufacturer}`;
 
-  private baseUrl = 'http://localhost:8091/api/manufacturer';
+    constructor(private httpClient: HttpClient,
+                private authService: AuthService
+                ) {}
 
-  constructor(private httpClient: HttpClient) {}
+    getAll(page: number = 0, size: number = 5): Observable<PageResponseDto<Manufacturer>> {
+        const params = new HttpParams()
+          .set('page', page.toString())
+          .set('size', size.toString());
+        return this.httpClient.get<PageResponseDto<Manufacturer>>(this.baseUrl, { params });
+    }
 
-  // ================= CREATE =================
-  create(manufacturer: Manufacturer): Observable<Manufacturer> {
-    return this.httpClient.post<Manufacturer>(
-      this.baseUrl,
-      manufacturer
-    );
-  }
+    search(mfgName: string = '', page: number = 0, size: number = 5): Observable<PageResponseDto<Manufacturer>> {
+        const params = new HttpParams()
+          .set('page', page.toString())
+          .set('size', size.toString());
 
-  // ================= GET ALL =================
-  getAll(): Observable<Manufacturer[]> {
-    console.log('ManufacturerService: Fetching all manufacturers');
-    
-    return this.httpClient.get<Manufacturer[]>(this.baseUrl);
-  }
+        const url = mfgName ? `${this.baseUrl}/search/${encodeURIComponent(mfgName)}` : `${this.baseUrl}/search`;
+        return this.httpClient.get<PageResponseDto<Manufacturer>>(url, { params });
+    }
 
-  // ================= GET BY ID =================
-  getById(id: number): Observable<Manufacturer> {
-    return this.httpClient.get<Manufacturer>(
-      `${this.baseUrl}/id/${id}`
-    );
-  }
+    // ================= GET BY ID =================
+    getById(id: number): Observable<Manufacturer> {
+        return this.httpClient.get<Manufacturer>(
+          `${this.baseUrl}/id/${id}`
+        );
+    }
 
-  // ================= GET BY NAME =================
-  getByName(name: string): Observable<Manufacturer> {
-    return this.httpClient.get<Manufacturer>(
-      `${this.baseUrl}/name/${name}`
-    );
-  }
+    // ================= GET BY NAME =================
+    getByName(name: string): Observable<Manufacturer> {
+        return this.httpClient.get<Manufacturer>(
+          `${this.baseUrl}/name/${name}`
+        );
+    }
 
-  // ================= SEARCH =================
-  search(mfgName: string): Observable<Manufacturer[]> {
-    return this.httpClient.get<Manufacturer[]>(
-      `${this.baseUrl}/search/${mfgName}`
-    );
-  }
+    create(manufacturer: Manufacturer): Observable<Manufacturer> {
+        return this.httpClient.post<Manufacturer>(
+            this.baseUrl,
+            manufacturer,
+            {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + this.authService.getToken() // Assuming you have an authService to get the token
+                })
+            }
+        );
+    }
 
-  // ================= DELETE =================
-  delete(id: number): Observable<string> {
-    return this.httpClient.delete(
-      `${this.baseUrl}/${id}`,
-      { responseType: 'text' }
-    );
-  }
+    update(manufacturer: Manufacturer): Observable<Manufacturer> {
+        return this.httpClient.put<Manufacturer>(`${this.baseUrl}/${manufacturer.manufacturerId}`, manufacturer);
+    }
+
+    delete(id: number): Observable<void> {
+        return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
+    }
 }

@@ -1,0 +1,88 @@
+<p class="searchTitle">&nbsp;&nbsp;Product Interface: Home</p>
+
+<div *ngIf="errorMessage" class="error-msg" style="color:red;">
+    &nbsp;&nbsp;<b>{{ errorMessage }}</b>
+</div>
+
+<div *ngIf="successMessage" style="color: green;">
+    &nbsp;&nbsp;<b>{{ successMessage }}</b>
+</div>
+
+<p>&nbsp;&nbsp;
+    <input *ngIf="isAdminUser" type="button" value="Add Product" (click)="addProduct('/product/add')" />&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="addProduct('/login-home')" />
+</p>
+
+<form [formGroup]="productForm" (ngSubmit)="searchProduct()">
+    <table width="100%">			
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Name:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="productName" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Description:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="productDescription" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Cas Number:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="casNumber" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>		
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td align="center" colspan="2" width="50%">
+                <input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="addProduct('/login-home')" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>				
+        <tr>
+            <td width="100%" colspan="4"><hr /></td>
+        </tr>	
+    </table>
+    <!-- Display search results -->
+    <p class="searchTitle">&nbsp;&nbsp;Product Search Results:</p>
+    <table *ngIf="products.length > 0" class="searchDetail">
+        <tr>				
+            <th>Product name</th>				
+			<th>Product description</th>
+			<th>Cas Number</th>
+            <th *ngIf="isAdminUser">Update</th>
+            <th *ngIf="isAdminUser">Delete</th>						
+        </tr>
+        <tr *ngFor="let p of products" class="detailData">
+            <td class="center">{{ p.productName }}</td>
+            <td class="leftNoBold">{{ p.productDescription }}</td>
+            <td class="leftNoBold">{{ p.casNumber }}</td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Update" (click)="updateProduct(p.productId)" />
+            </td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Delete" (click)="deleteProduct(p.productId)" />
+            </td>
+        </tr>  
+        <!-- Pagination controls -->
+        <div class="pagination" style="margin-top:10px;">
+            <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+            <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+            <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+        </div>
+    </table>
+    <div *ngIf="products.length === 0">
+        <p class="searchTitle">&nbsp;&nbsp;No products are found.</p>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+<p class="searchTitle">&nbsp;&nbsp;Product Interface: Delete Product</p>
+
+<form [formGroup]="productForm" (ngSubmit)="deleteProduct()" novalidate>
+	<div *ngIf="errorMessages.length">
+		<ul style="color: red;">
+			<li *ngFor="let err of errorMessages">
+				{{ err }}
+			</li>
+		</ul>
+	</div>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Name:</b></td>
+            <td width="30%" align="left">{{ product.productName}}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Description:</b></td>
+            <td width="30%" align="left">{{product.productDescription}}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Cas Number:</b></td>
+            <td width="30%" align="left">{{product.casNumber}}</td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>				
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+				<input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsProductSubmit('/product')" />
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+    <input type="hidden" formControlName="productId" />
+</form>

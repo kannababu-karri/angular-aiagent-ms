@@ -1,0 +1,96 @@
+<p class="searchTitle">&nbsp;&nbsp;Product Interface: Home</p>
+
+<div *ngIf="errorMessage" class="error-msg" style="color:red;">
+    &nbsp;&nbsp;<b>{{ errorMessage }}</b>
+</div>
+
+<div *ngIf="successMessage" style="color: green;">
+    &nbsp;&nbsp;<b>{{ successMessage }}</b>
+</div>
+
+<p>&nbsp;&nbsp;
+    <input *ngIf="isAdminUser" type="button" value="Add Order" (click)="addOrderqty('/orderqty/add')" />&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="addOrderqty('/login-home')" />
+</p>
+
+<form [formGroup]="orderqtyForm" (ngSubmit)="searchOrderqty()">
+    <table width="100%">			
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Manufacturer Name:</b></td>
+			<td width="30%" align="left">
+                <select formControlName="manufacturerId" class="form-control">
+                    <option value="">Choose one...</option>
+                    <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.manufacturerId">{{ manufacturer.mfgName }}</option>
+                </select>	
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Product Name:</b></td>
+			<td width="30%" align="left">
+                <select formControlName="productId" class="form-control">
+                    <option value="">Choose one...</option>
+                    <option *ngFor="let product of products" [value]="product.productId">{{ product.productName }} - {{ product.casNumber }}</option>
+                </select>	
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>		
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td align="center" colspan="2" width="50%">
+                <input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="addOrderqty('/login-home')" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>				
+        <tr>
+            <td width="100%" colspan="4"><hr /></td>
+        </tr>	
+    </table>
+    <!-- Display search results -->
+    <p class="searchTitle">&nbsp;&nbsp;Order Search Results:</p>
+    <table *ngIf="orderqtys.length > 0" class="searchDetail">
+        <tr>				
+            <th>Login id</th>				
+            <th>Role</th>
+            <th>Manufacturer name</th>				
+            <th>Product name</th>				
+            <th>Product description</th>
+            <th>Cas Number</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th *ngIf="isAdminUser">Update</th>
+            <th *ngIf="isAdminUser">Delete</th>						
+        </tr>
+        <tr *ngFor="let orderqty of orderqtys" class="detailData">
+            <td class="center">{{orderqty.user?.userName}}</td>
+            <td class="center">{{orderqty.user?.role}}</td>
+            <td class="center">{{orderqty.manufacturer?.mfgName}}</td>						
+            <td class="center">{{orderqty.product?.productName}}</td>
+            <td class="leftNoBold">{{orderqty.product?.productDescription}}</td>
+            <td class="leftNoBold">{{orderqty.product?.casNumber}}</td>
+            <td class="leftNoBold">{{orderqty.quantity}}</td>
+            <td class="leftNoBold">{{orderqty.status}}</td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Update" (click)="updateOrderqty(orderqty.orderId)" />
+            </td>
+            <td class="leftNoBold" *ngIf="isAdminUser">
+                <input type="button" value="Delete" (click)="deleteOrderqty(orderqty.orderId)" />
+            </td>
+        </tr>  
+        <!-- Pagination controls -->
+        <div class="pagination" style="margin-top:10px;">
+            <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+            <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+            <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+        </div>
+    </table>
+    <div *ngIf="products.length === 0">
+        <p class="searchTitle">&nbsp;&nbsp;No orders are found.</p>
+    </div>
+</form>

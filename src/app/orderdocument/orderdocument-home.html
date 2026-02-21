@@ -1,0 +1,92 @@
+<p class="searchTitle">&nbsp;&nbsp;MongoDB Interface: Home</p>
+
+<div *ngIf="errorMessage" class="error-msg" style="color:red;">
+    &nbsp;&nbsp;<b>{{ errorMessage }}</b>
+</div>
+
+<div *ngIf="successMessage" style="color: green;">
+    &nbsp;&nbsp;<b>{{ successMessage }}</b>
+</div>
+
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsOrderdocumentSubmit('/login-home')" />
+</p>
+
+<form [formGroup]="orderdocumentForm" (ngSubmit)="searchOrderdocument()">
+    <table width="100%">			
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Manufacturer Name:</b></td>
+			<td width="30%" align="left">
+                <select formControlName="manufacturerId" class="form-control">
+                    <option value="">Choose one...</option>
+                    <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.manufacturerId">{{ manufacturer.mfgName }}</option>
+                </select>	
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="20%" align="right"><b>Product Name:</b></td>
+			<td width="30%" align="left">
+                <select formControlName="productId" class="form-control">
+                    <option value="">Choose one...</option>
+                    <option *ngFor="let product of products" [value]="product.productId">{{ product.productName }} - {{ product.casNumber }}</option>
+                </select>	
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>		
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td align="center" colspan="2" width="50%">
+                <input type="submit" value="Submit" />&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsOrderdocumentSubmit('/login-home')" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>				
+        <tr>
+            <td width="100%" colspan="4"><hr /></td>
+        </tr>	
+    </table>
+    <!-- Display search results -->
+    <p class="searchTitle">&nbsp;&nbsp;MongoDB Order Search Results::</p>
+    <table *ngIf="orderdocuments.length > 0" class="searchDetail">
+        <tr>				
+            <th>Type</th>
+            <th>Order id</th>
+            <th>Mfg id</th>
+            <th>Mfg name</th>	
+            <th>Product id</th>				
+            <th>Product name</th>				
+            <th>Product description</th>
+            <th>Cas Number</th>
+            <th>Quantity</th>
+            <th>Created date</th>						
+        </tr>
+        <tr *ngFor="let orderdocument of orderdocuments" class="detailData">
+            <td class="center">{{orderdocument.documentType}}</td>
+            <td class="center">{{orderdocument.orderQtyId}}</td>
+            <td class="center">{{orderdocument.manufacturerId}}</td>
+            <td class="center">{{orderdocument.mfgName}}</td>						
+            <td class="center">{{orderdocument.productId}}</td>
+            <td class="leftNoBold">{{orderdocument.productName}}</td>
+            <td class="leftNoBold">{{orderdocument.productDescription}}</td>
+            <td class="leftNoBold">{{orderdocument.casNumber}}</td>
+            <td class="leftNoBold">{{orderdocument.quantity}}</td>
+            <td class="leftNoBold">{{orderdocument.createdAt}}</td>
+            
+        </tr>  
+        <!-- Pagination controls -->
+        <div class="pagination" style="margin-top:10px;">
+            <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+            <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+            <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+        </div>
+    </table>
+    <div *ngIf="orderdocuments.length === 0">
+        <p class="searchTitle">&nbsp;&nbsp;No records are found.</p>
+    </div>
+</form>

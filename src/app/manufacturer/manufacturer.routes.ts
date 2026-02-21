@@ -4,25 +4,25 @@ export const manufacturerRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./components/manufacturer-home/manufacturer-home.component')
+      import('./manufacturer-home/manufacturer-home.component')
         .then(m => m.ManufacturerHomeComponent)
   },
   {
     path: 'add',
     loadComponent: () =>
-      import('./components/manufacturer-add/manufacturer-add.component')
+      import('./manufacturer-add/manufacturer-add.component')
         .then(m => m.ManufacturerAddComponent)
   },
   {
-    path: 'update',
+    path: 'update/:id',
     loadComponent: () =>
-      import('./components/manufacturer-update/manufacturer-update.component')
+      import('./manufacturer-update/manufacturer-update.component')
         .then(m => m.ManufacturerUpdateComponent)
   },
   {
-    path: 'delete',
+    path: 'delete/:id',
     loadComponent: () =>
-      import('./components/manufacturer-delete/manufacturer-delete.component')
+      import('./manufacturer-delete/manufacturer-delete.component')
         .then(m => m.ManufacturerDeleteComponent)
   }
 ];

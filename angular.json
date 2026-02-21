@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ILabs": {
+    "angular-ms": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -63,10 +63,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ILabs:build:production"
+              "buildTarget": "angular-ms:build:production"
             },
             "development": {
-              "buildTarget": "ILabs:build:development"
+              "buildTarget": "angular-ms:build:development"
             }
           },
           "defaultConfiguration": "development"
