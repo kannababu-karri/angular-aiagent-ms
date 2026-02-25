@@ -33,6 +33,14 @@ export class AuthService {
     return user?.userId ?? null;
   }
 
+  getUserName(): string {
+    const userStr = sessionStorage.getItem('loggedInUser');
+    if (!userStr) return '';
+    const user = JSON.parse(userStr);
+    console.log('getUserName() - user object:', user);
+    return user?.userName ?? null;
+  }
+
   loadUser() {
     const user = sessionStorage.getItem('loggedInUser');
     if (user) {

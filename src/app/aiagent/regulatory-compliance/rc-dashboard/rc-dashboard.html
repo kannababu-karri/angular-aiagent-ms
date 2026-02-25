@@ -1,0 +1,54 @@
+<p class="searchTitle">&nbsp;&nbsp;AI Agents Interface: Regulatory Compliance Dashboard</p>
+
+<div *ngIf="errorMessages.length">
+    <ul style="color: red;">
+        <li *ngFor="let err of errorMessages">
+            {{ err }}
+        </li>
+    </ul>
+</div>
+
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsDashboardSubmit('/login-home')" />
+</p>
+
+<form [formGroup]="dashboardForm" (ngSubmit)="searchDashboardSubmit()">
+    <p class="searchTitle">&nbsp;&nbsp;Regulatory Compliance Results:</p>
+    <!-- Pagination controls -->
+    <div class="pagination" style="margin-top:10px;">
+        <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+        <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+        <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+    </div>
+    <table *ngIf="rcComplianceResultsDtos.length > 0" class="searchDetail">
+		<tr>
+			<th>Batch No</th>
+            <th>Product</th>
+            <th>Uploaded By</th>
+            <th>Status</th>
+            <th>Score</th>
+            <th>Risk</th>
+            <th>Findings</th>
+            <th>Reviewed At</th>						
+		</tr>
+        <tr *ngFor="let dto of rcComplianceResultsDtos" class="detailData">
+            <td class="leftNoBold">{{dto.batchNo}}</td>
+            <td class="leftNoBold">{{dto.productName}}</td>
+            <td class="leftNoBold">{{dto.uploadedBy}}</td>
+            <td class="leftNoBold">{{dto.status}}</td>
+            <td class="center">{{dto.score}}</td>
+            <td class="center">{{dto.riskLevel}}</td>
+            <td class="leftNoBold" style="white-space: pre-wrap;">{{dto.findings}}</td>
+            <td class="leftNoBold">{{dto.reviewedAt}}</td>
+        </tr>  
+    </table>
+    <!-- Pagination controls -->
+    <div class="pagination" style="margin-top:10px;">
+        <button type="button" (click)="previousPage()" [disabled]="pageNumber === 0">Previous</button>
+        <span> Page {{ pageNumber + 1 }} of {{ totalPages }} </span>
+        <button type="button" (click)="nextPage()" [disabled]="pageNumber + 1 >= totalPages">Next</button>
+    </div>
+    <div *ngIf="rcComplianceResultsDtos.length === 0">
+        <p class="searchTitle">&nbsp;&nbsp;No records are found.</p>
+    </div>
+</form>

@@ -1,0 +1,70 @@
+<p class="searchTitle">&nbsp;&nbsp;AI Agent Interface: Home</p>
+<p class="searchTitle">&nbsp;&nbsp;Regulatory compliance details are saved into database and results are displayed in the page.</p>
+
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsProcessSubmit('/login-home')" />
+</p>
+
+<form [formGroup]="rcProcessForm" (ngSubmit)="rcProcessSubmit()">
+    <div *ngIf="errorMessages.length">
+        <ul style="color: red;">
+            <li *ngFor="let err of errorMessages">
+                {{ err }}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="successMessage" style="color: green;">
+        &nbsp;&nbsp;<b>{{ successMessage }}</b>
+    </div>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Batch No:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="batchNo" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Product Name:</b></td>
+            <td width="30%" align="left">
+                <input type="text" formControlName="productName" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Upload File:</b></td>
+            <td width="30%" align="left">
+				<input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>				
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+                <button type="submit" [disabled]="isProcessing">Submit</button>&nbsp;&nbsp;
+                <input type="button" value="Cancel" (click)="jsProcessSubmit('/login-home')" />
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+    <div *ngIf="aiAgentResponse && aiAgentResponse.length > 0">
+        <p class="searchTitle">
+            &nbsp;&nbsp;AI regulatory GMP audit compliance report:
+        </p> 
+        <p  class="searchTitle">&nbsp;&nbsp;Batch ID: {{ batchId }}</p>
+        <div class="ai-agent-report-box" [innerHTML]="aiAgentResponse"></div>
+    </div>
+</form>
+<!-- Optional: show spinner -->
+<div *ngIf="isProcessing" class="loading-overlay">
+    Processing... Please wait.
+</div>

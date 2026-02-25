@@ -28,17 +28,25 @@ export const routes: Routes = [
               .then(p => p.productRoutes)
   },
 
- {
+  {
       path: 'orderqty',
           loadChildren: () => import('./orderqty/orderqty.routes')
               .then(p => p.orderqtyRoutes)
   },
 
-{
+ {
       path: 'orderdocument',
           loadChildren: () => import('./orderdocument/orderdocument.routes')
               .then(p => p.orderdocumentRoutes)
   },
+
+   {
+      path: 'regulatorycompliance',
+          loadChildren: () => import('./aiagent/regulatory-compliance/regulatory-compliance.routes')
+              .then(p => p.regulatoryComplianceRoutes)
+  },
+
+  
 
   { 
       path: '**', redirectTo: 'login' 

@@ -99,7 +99,6 @@ export class OrderdocumentHomeComponent implements OnInit {
         this.productService.getAll(pageProd, 500).subscribe({
             next: (data: PageResponseDto<Product>) => {
                 this.products = data.content || [];
-                this.totalPages = data.totalPages;
                 
                 this.cd.detectChanges();
                 console.log('Search all products results:', this.products);
@@ -146,7 +145,11 @@ export class OrderdocumentHomeComponent implements OnInit {
 
         console.log('Searching for orderdocument:', manufacturerId + ", " + productId);
 
-        this.userId = this.authService.getUserId();
+        if(this.authService.isAdmin()) {
+            this.userId = 0;
+        } else {
+            this.userId = this.authService.getUserId();
+        }
 
         console.log('userId:', this.userId);
 
@@ -164,7 +167,7 @@ export class OrderdocumentHomeComponent implements OnInit {
 
                     this.cd.detectChanges();
 
-                    console.log('Search orderdocument results:', this.orderdocuments);
+                    console.log('Search orderdocument results:', data);
                 },
                 error: (err) => { 
                     console.error('Failed to display search orderdocuments result...', err);
