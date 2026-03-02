@@ -1,0 +1,56 @@
+<p class="searchTitle">&nbsp;&nbsp;AI Agents Interface: ChromaDB Dashboard/Upload</p>
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsProcessSubmit('/login-home')" />
+</p>
+
+<form [formGroup]="mediragProcessForm" (ngSubmit)="mediragProcessSubmit()">
+    <div *ngIf="errorMessages.length">
+        <ul style="color: red;">
+            <li *ngFor="let err of errorMessages">
+                {{ err }}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="successMessage" style="color: green;">
+        &nbsp;&nbsp;<b>{{ successMessage }}</b>
+    </div>
+    <p class="searchTitle">&nbsp;&nbsp;ChromaDB Uploaded Document Results:</p>
+   
+    <table>
+        <tr>
+            <td style="text-align: left; vertical-align: top;" width="60%">
+                 <div *ngFor="let doc of documentDtos">
+                    &nbsp;&nbsp;{{ doc.file_name }} ({{ doc.total_pages }} pages)
+                    <!-- <ul>
+                        <li *ngFor="let page of doc.pages">
+                            Page {{ page.page }}: {{ page.content_preview }}
+                        </li>
+                    </ul> -->
+                </div>  
+                <table *ngIf="documentDtos.length === 0">
+                    <tr><td>&nbsp;&nbsp;No documents are uploaded into chroma database.</td></tr>
+                </table>
+            </td>
+            <td style="text-align: right; vertical-align: top;" width="40%">
+                <table style="text-align: right; vertical-align: top;">
+                    <tr>	
+                        <td><b>Upload File:</b></td>
+                        <td>
+                            <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+                        </td>
+                    </tr>
+                    <tr>		
+                        <td colspan="2" style="text-align: center; vertical-align: top;">
+                            <button type="submit" [disabled]="isProcessing">Submit</button>&nbsp;&nbsp;
+                            <input type="button" value="Cancel" (click)="jsProcessSubmit('/login-home')" />
+                        </td>
+                    </tr>	
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
+<!-- Optional: show spinner -->
+<div *ngIf="isProcessing" class="loading-overlay">
+    Processing... Please wait.
+</div>

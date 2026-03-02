@@ -147,15 +147,73 @@ div.ai-agent-report-box {
 }
 
 .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  z-index: 9999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255,255,255,0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	z-index: 9999;
+}
+
+.chat-container {
+	width: 1000px;
+	margin: 40px auto;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-family: Arial;
+}
+
+.chat-box {
+	height: 400px;
+	overflow-y: auto;
+	padding: 10px;
+	background: #f9f9f9;
+}
+
+.input-box {
+	display: flex;
+	padding: 10px;
+	border-top: 1px solid #ccc;
+}
+
+input {
+	flex: 1;
+	padding: 6px;
+}
+
+button {
+  	margin-left: 5px;
+}
+
+.loading {
+	text-align: center;
+	color: gray;
+}
+
+.bot-msg {
+  background: #f1f5ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+  white-space: pre-wrap;   /* important */
+  line-height: 1.5;
+}
+
+.user-msg {
+  background: #dff6dd;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  text-align: right;
+}
+
+.sources {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #444;
 }

@@ -34,19 +34,23 @@ export const routes: Routes = [
               .then(p => p.orderqtyRoutes)
   },
 
- {
+  {
       path: 'orderdocument',
           loadChildren: () => import('./orderdocument/orderdocument.routes')
               .then(p => p.orderdocumentRoutes)
   },
 
-   {
+ {
       path: 'regulatorycompliance',
           loadChildren: () => import('./aiagent/regulatory-compliance/regulatory-compliance.routes')
               .then(p => p.regulatoryComplianceRoutes)
   },
 
-  
+  {
+      path: 'medirag',
+          loadChildren: () => import('./aiagent/medi-rag/medi-rag.routes')
+              .then(p => p.mediRagRoutes)
+  },
 
   { 
       path: '**', redirectTo: 'login' 

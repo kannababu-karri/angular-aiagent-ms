@@ -1,0 +1,32 @@
+<p class="searchTitle">&nbsp;&nbsp;AI Agents Interface: Chatbot with ChromaDB/RAG</p>
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsChatbotSubmit('/login-home')" />
+</p>
+<div class="chat-container">
+    <div class="chat-box" #chatBox>
+        <div *ngFor="let msg of messages">
+            <div *ngIf="msg.sender === 'user'" class="user-msg">
+                {{ msg.text }}
+            </div>
+            <div *ngIf="msg.sender === 'bot'" class="bot-msg">
+                {{ msg.text }}
+                <div *ngIf="msg.sources?.length" class="sources">
+                    <b>Sources:</b>
+                        <ul>
+                            <li *ngFor="let s of msg.sources">{{ s }}</li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div *ngIf="loading" class="loading">
+            Request is processing from ChromaDB/RAG ...
+        </div> -->
+    </div>
+    <div class="input-box">
+        <input [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Ask about uploaded document...">
+        <button (click)="sendMessage()" [disabled]="loading">Send</button>  
+    </div>
+</div>
+<div *ngIf="loading" class="loading-overlay">
+    Request is processing from Vector ChromaDB/RAG... Please wait.
+</div>
