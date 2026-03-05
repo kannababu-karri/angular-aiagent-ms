@@ -1,11 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { RegulatoryComplianceService } from "../../../services/regulatory.compliance.service";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { MediRagService } from "../../../services/medi.rag.service";
-import { DocumentDto } from "../../../models/documentdto.model";
 
 
 @Component({

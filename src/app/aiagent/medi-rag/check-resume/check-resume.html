@@ -1,0 +1,59 @@
+<p class="searchTitle">&nbsp;&nbsp;AI Agents Interface: Check Resume</p>
+<p>&nbsp;&nbsp;
+    <button type="button" (click)="jsCheckResumeSubmit('/login-home')">Return Home</button>
+</p>
+
+<form [formGroup]="checkResumeForm" (ngSubmit)="checkResumeSubmit()">
+    <div *ngIf="errorMessages.length">
+        <ul style="color: red;">
+            <li *ngFor="let err of errorMessages">
+                {{ err }}
+            </li>
+        </ul>
+    </div>
+    <p class="searchTitle">&nbsp;&nbsp;Upload resume and enter job description.</p>
+   
+    <table align="center">
+        <tr>	
+            <td align="right"><b>Resume:</b></td>
+            <td align="left">
+                <input type="file" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><b>Job Description:</b></td>
+            <td align="left">
+                <textarea 
+                    formControlName="jobDescription"
+                     rows="10"
+                    cols="80"
+                    placeholder="Paste job description here">
+                </textarea>
+            </td>
+        </tr>
+        <tr>		
+            <td colspan="2" style="text-align: center; vertical-align: top;">
+                <button type="submit" [disabled]="isProcessing">Check Resume Match</button>&nbsp;
+                <button type="button" (click)="jsCheckResumeSubmit('/login-home')">Cancel</button>
+            </td>
+        </tr>	
+    </table>
+    <div>&nbsp;&nbsp;</div>
+    <div *ngIf="successMessage" style="color: green;">
+        &nbsp;&nbsp;<b>{{ successMessage }}</b>
+    </div>
+    <div *ngIf="aiAgentReason">
+        <ul>
+            <li>
+                <b>Result:</b> {{ match }}
+            </li>
+            <li>
+                <b>Reasoning:</b> {{ aiAgentReason }}
+            </li>
+        </ul>
+    </div>
+</form>
+<!-- Optional: show spinner -->
+<div *ngIf="isProcessing" class="loading-overlay">
+    Processing... Please wait.
+</div>

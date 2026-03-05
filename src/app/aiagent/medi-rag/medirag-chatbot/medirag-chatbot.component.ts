@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MediRagService } from "../../../services/medi.rag.service";
 import { ViewChild, ElementRef } from '@angular/core';
-import { RagResponse } from "../../../models/rag-response.model";
 import { Router } from "@angular/router";
 
 @Component({

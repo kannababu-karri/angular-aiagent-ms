@@ -6,6 +6,8 @@ import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { DocumentDto } from "../models/documentdto.model";
 import { RagResponse } from "../models/rag-response.model";
+import { CheckLogs } from "../models/check-logs.model";
+import { CheckResume } from "../models/check-resume.model";
 
 @Injectable({
     providedIn: 'root'
@@ -74,5 +76,35 @@ export class MediRagService {
                 headers: headers
             }
         );
+    }
+
+    checkResume(formData: FormData) {
+
+        const token = sessionStorage.getItem('token');
+
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+
+        formData.forEach((value, key) => {
+            console.log(key, value);
+        });
+
+        return this.httpClient.post<CheckResume>(this.baseUrl + '/check-resume', formData, { headers });
+    }
+
+    checkLogs(formData: FormData) {
+
+        const token = sessionStorage.getItem('token');
+
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+
+        formData.forEach((value, key) => {
+            console.log(key, value);
+        });
+
+        return this.httpClient.post<CheckLogs>(this.baseUrl + '/check-logs', formData, { headers });
     }
 }
