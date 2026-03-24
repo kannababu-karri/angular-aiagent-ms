@@ -1,0 +1,123 @@
+<p class="searchTitle">&nbsp;&nbsp;Fraud Detection AI Agents: Home</p>
+
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsFraudDetectionSubmit('/login-home')" />
+</p>
+
+<form [formGroup]="fraudDetectionForm" (ngSubmit)="fraudDetectionSubmit()">
+    <div *ngIf="errorMessages.length">
+        <ul style="color: red;">
+            <li *ngFor="let err of errorMessages">
+                {{ err }}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="successMessage" style="color: green;">
+        &nbsp;&nbsp;<b>{{ successMessage }}</b>
+    </div>
+	<table width="100%">		
+		<tr>
+			<td width="100%" colspan="4">&nbsp;</td>
+		</tr>	
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Date & Time:</b></td>
+            <td width="30%" align="left">
+                <input type="datetime-local" formControlName="transactionDate" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Amount:</b></td>
+            <td width="30%" align="left">
+                 <input type="number" formControlName="amount" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Merchant ID:</b></td>
+            <td width="30%" align="left">
+				<input type="number" formControlName="merchantID" />
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+       <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Transaction Type:</b></td>
+            <td width="30%" align="left">
+				<select formControlName="transactionType">
+                    <option value="purchase">Purchase</option>
+                    <option value="refund">Refund</option>
+                </select>
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+       <tr>
+            <td width="1%">&nbsp;</td>			
+            <td width="20%" align="right"><b>Location:</b></td>
+            <td width="30%" align="left">
+				<select formControlName="location">
+                    <option>Dallas</option>
+                    <option>New York</option>
+                    <option>Philadelphia</option>
+                    <option>Phoenix</option>
+                    <option>San Antonio</option>
+                    <option>San Diego</option>
+                    <option>San Jose</option>
+                </select>
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>				
+		<tr>
+			<td width="1%">&nbsp;</td>			
+			<td width="50%" align="center" colspan="2">
+                <button type="submit" [disabled]="isProcessing">Check Fraud</button>&nbsp;
+                <button type="button" (click)="jsFraudDetectionSubmit('/login-home')">Cancel</button>
+			</td>
+			<td width="49%">&nbsp;</td>
+		</tr>				
+	</table>
+    <!-- RESULT -->
+    <div *ngIf="result as res" 
+        class="result-box"
+        [ngClass]="res.is_fraud ? 'fraud' : 'safe'">
+
+        <h3>
+            {{ res.is_fraud ? '🚨 Fraud Detected' : '✅ Safe Transaction' }}
+        </h3>
+
+        <p>
+            <b>Fraud Probability:</b> 
+            {{ res.fraud_probability | number:'1.2-2' }}
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar"
+                [style.width.%]="res.fraud_probability * 100">
+            </div>
+        </div>
+
+        <h4>🤖 AI Explanation</h4>
+
+        <ul *ngIf="res.explanation?.length; else noExplanation">
+            <li *ngFor="let exp of res.explanation">
+                👉 {{exp}}
+            </li>
+        </ul>
+
+        <ng-template #noExplanation>
+            <p>No explanation available</p>
+        </ng-template>
+
+    </div>
+</form>
+<!-- Optional: show spinner -->
+<div *ngIf="isProcessing" class="loading-overlay">
+    Request is processing for finding fraud detection. Please wait........
+</div>

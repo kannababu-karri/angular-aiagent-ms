@@ -52,6 +52,12 @@ export const routes: Routes = [
               .then(p => p.mediRagRoutes)
   },
 
+  {
+      path: 'paymentdomain',
+          loadChildren: () => import('./aiagent/payment-domain/fraud-detection.routes')
+              .then(p => p.fraudDetectionRoutes)
+  },
+
   { 
       path: '**', redirectTo: 'login' 
   }

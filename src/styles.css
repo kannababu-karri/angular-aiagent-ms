@@ -7,7 +7,7 @@ table.headerMain {
 }
 
 table.headerMain tr.headerMainTr td.headerMainTd {
-	font: bold 2em arial, sans-serif;
+	font: bold 1.25em arial, sans-serif;
 	margin: 0px;
 	padding: 0;
 }
@@ -216,4 +216,34 @@ button {
   margin-top: 8px;
   font-size: 13px;
   color: #444;
+}
+
+.result-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.safe {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.fraud {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 50%;
+  background: #ddd;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #d32f2f;
+  border-radius: 10px;
 }
