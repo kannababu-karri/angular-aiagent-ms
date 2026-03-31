@@ -67,4 +67,8 @@ export class ManufacturerService {
     delete(id: number): Observable<void> {
         return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
     }
+
+    getCircuitBreakerLogs(): Observable<string[]> {
+        return this.httpClient.get<string[]>(`${this.baseUrl}/circuitBreakerDemo`);
+    }
 }

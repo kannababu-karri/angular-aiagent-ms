@@ -1,3 +1,4 @@
+<!--
 <table class="headerMain">
     <tr>
         <td colspan="3"><hr /></td>
@@ -26,3 +27,30 @@
         <td colspan="3"><hr /></td>
     </tr>
 </table>
+-->
+<div class="headerMain">
+
+    <!-- Header -->
+    <div class="app-header">
+        <!-- Left side: User & Version -->
+        <div class="header-left">
+            <span class="user-name">
+                <i class="fa fa-user"></i>Kannababu Karri
+            </span>
+            <span class="version-badge">Version 1.9</span>
+        </div>
+
+        <!-- Center: App Title -->
+        <div class="header-center">
+            Angular-Microservices-ML Models Application
+        </div>
+
+        <!-- Right side: Role + Logout -->
+        <div class="header-right">
+            @if (user) {
+                <span class="user-role"><b>Role:</b> {{ user.role }}</span>
+                <a href="#" (click)="logout()">Logout</a>
+            }
+        </div>
+    </div>
+</div>

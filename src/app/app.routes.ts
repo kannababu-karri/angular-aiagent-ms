@@ -58,6 +58,10 @@ export const routes: Routes = [
               .then(p => p.fraudDetectionRoutes)
   },
 
+ {
+      path: 'circuitbreakerdemo', loadComponent: () =>  
+            import('./circuit-breaker/circuit-breaker.component') 
+                .then(m => m.CircuitBreakerComponent)},
   { 
       path: '**', redirectTo: 'login' 
   }

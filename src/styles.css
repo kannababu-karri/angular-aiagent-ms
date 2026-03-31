@@ -33,6 +33,7 @@ p.searchTitle {
 	font-weight: bold;
 	padding: 0;
 	margin: 5px 0 0 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 table.searchDetail {
@@ -246,4 +247,189 @@ button {
   height: 10px;
   background: #d32f2f;
   border-radius: 10px;
+}
+
+.login-card {
+  width: 350px;
+  margin: 25px auto;
+  padding: 30px;
+  background: #fbf8f8;
+  box-shadow: 0 6px 20px rgba(127, 70, 70, 0.25);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.button-group button:last-child {
+  background: #64748b;
+}
+
+.ai-based-container {
+  float: left;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 5px 5px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 20px;
+  border-left: 5px solid #3f51b5;
+  padding-left: 10px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+  font-size: px;
+  color: #333;
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Custom bullet */
+.features li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Hover effect */
+.features li:hover {
+  color: #0d47a1;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+/* Header container */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #3f51b5, #5c6bc0);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 0 0 12px 12px;
+  gap: 20px;
+}
+
+/* Left side: user + version */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.user-name i {
+  margin-right: 5px;
+  color: #ffeb3b; /* user icon color */
+}
+
+.version-badge {
+  background: #ff5722;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Center: app title */
+.header-center {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Right side: role + logout */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.header-right a {
+  color: #ffeb3b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+    gap: 8px;
+  }
+
+  .header-left, .header-center, .header-right {
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .header-center {
+    margin: 8px 0;
+  }
 }

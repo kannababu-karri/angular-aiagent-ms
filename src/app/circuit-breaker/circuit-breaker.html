@@ -1,0 +1,45 @@
+<p class="searchTitle">&nbsp;&nbsp;Circuit Breaker Resilience4j Demo: Home</p>
+
+<div *ngIf="errorMessage" class="error-msg" style="color:red;">
+    &nbsp;&nbsp;<b>{{ errorMessage }}</b>
+</div>
+
+<div *ngIf="successMessage" style="color: green;">
+    &nbsp;&nbsp;<b>{{ successMessage }}</b>
+</div>
+
+<p>&nbsp;&nbsp; 
+    <button (click)="loginHome('/login-home')">Return Home</button>
+</p>
+
+<form [formGroup]="manufacturerForm" (ngSubmit)="loadCircuitBreakerLogs()">
+    <table width="100%">			
+        <tr>
+            <td width="100%" colspan="4">&nbsp;</td>
+        </tr>		
+        <tr>
+            <td width="1%">&nbsp;</td>			
+            <td align="center" colspan="2" width="50%">
+                <button type="submit" [disabled]="isProcessing">Click About Circuit Breaker Demo</button>&nbsp;
+                <button (click)="loginHome('/login-home')">Return Home</button>
+            </td>
+            <td width="49%">&nbsp;</td>
+        </tr>				
+        <tr>
+            <td width="100%" colspan="4"><hr /></td>
+        </tr>	
+    </table>
+    <!-- Display search results -->
+    <p class="searchTitle">&nbsp;&nbsp;Circuit Breaker Resilience4j Demo Results:</p>
+
+    <div *ngIf="logs.length === 0">
+        &nbsp;&nbsp;No logs available
+    </div>
+
+    <div *ngFor="let log of logs">
+        &nbsp;&nbsp;{{ log }}
+    </div>
+</form>
+<div *ngIf="isProcessing" class="loading-overlay">
+    Request is processing for circuit breaker event logs. Please wait........
+</div>

@@ -7,7 +7,8 @@
     @if (successMessage()) {
         <div style="color: green;">&nbsp;&nbsp;<b>{{ successMessage() }}</b></div>
     }
-    
+</div>  
+    <!--
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <table class="login-table">			
             <tr>			
@@ -29,18 +30,47 @@
                 <td width="75%" align="left"><button type="submit">Submit</button>&nbsp;&nbsp;<button type="button" (click)="onReset()">Reset</button></td>
             </tr>		
         </table>
-    </form>
+    </form> -->
+    <div class="login-card">
+        <h2>Login</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>User Id</label>
+                <input id="username" formControlName="userName" placeholder="Username" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Password" />
+            </div>
+            <div class="button-group">
+                <button type="submit">Submit</button>
+                <button type="button" (click)="onReset()">Reset</button>
+            </div>
+        </form>
+    </div>
+<div>
     <ul style="color: black;">
+        <li><b>AI-Based Credit Card Fraud Detection System.</b></li>
+        <ul>
+            <li>Developed end-to-end fraud detection system using TensorFlow.</li>
+            <li>Built FastAPI microservice for real-time predictions.</li>
+            <li>Integrated with Spring Boot and Angular UI.</li>
+            <li>Implemented Explainable AI for model transparency.</li>
+        </ul>
+    </ul>
+</div>
+    <!--
+    <ul style="color: black;"> -->
         <!--<li><b>This is a personal project developed to demonstrate Angular architecture integrated with microservices-based and Python-based AI API service design.</b></li> -->
-        &nbsp;
+        <!--&nbsp;
         <li><b>AI-Based Credit Card Fraud Detection System</b>.
         <ul>
-            <!--<li><b>Fraud detection systems</b> using <b>TensorFlow, FastAPI, Spring Boot, and Angular</b>. End-to-end <b>model development, deployment and explainable AI.</b></li>-->
+            <li><b>Fraud detection systems</b> using <b>TensorFlow, FastAPI, Spring Boot, and Angular</b>. End-to-end <b>model development, deployment and explainable AI.</b></li>
             <li>Developed end-to-end fraud detection system using <b>TensorFlow.</b></li>
             <li>Built <b>FastAPI microservice</b> for real-time predictions.</li>
             <li>Integrated with <b>Spring Boot</b> and <b>Angular UI</b>.</li>
             <li>Implemented <b>Explainable AI</b> for model transparency.</li>
-        </ul>
+        </ul>-->
             <!--
         <li><b>Project 1: AI Agent - Angular, Spring Boot, Microservice, Python API AI Application</b></li>
         <ul>
@@ -79,6 +109,5 @@
                 <li>User – Can browse products, manufacturers and place orders.</li>			
                 <li>View – Read-only access for viewing data.</li>	
             </ul>
-        -->
-    </ul>
-</div>
+        
+    </ul> -->

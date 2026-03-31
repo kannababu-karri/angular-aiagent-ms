@@ -155,5 +155,10 @@ export class AuthService {
 
     return Date.now() < payload.exp * 1000;
   }
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.userSubject.next(null);
+  }
 
 }
