@@ -1,0 +1,39 @@
+<div class="chat-container">
+    <div *ngFor="let msg of messages">
+        <!-- USER -->
+        <div *ngIf="msg.sender === 'user'" class="user-msg">
+            {{ msg.message }}
+        </div>
+        <!-- BOT -->
+        <div *ngIf="msg.sender === 'bot'" class="bot-msg">
+            <div>
+                {{ msg.message }}
+            </div>
+            <!-- Specializations -->
+            <div *ngIf="msg.data">
+                <button *ngFor="let s of msg.data"
+                        (click)="selectSpecialization(s)">
+                {{ s.name }}
+                </button>
+            </div>
+            <!-- Doctors -->
+            <div *ngIf="msg.doctors">
+                <button *ngFor="let d of msg.doctors"
+                        (click)="selectDoctor(d)">
+                {{ d.name }}
+                </button>
+            </div>
+            <!-- Slots -->
+            <div *ngIf="msg.slots">
+                <button *ngFor="let s of msg.slots"
+                        (click)="selectSlot(s)">
+                {{ s.startTime }} - {{ s.endTime }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- INPUT -->
+    <input [(ngModel)]="userInput" placeholder="Type here..." />
+    <button (click)="sendMessage()">Send</button>
+    <button (click)="resetChat()">Restart</button>
+</div>

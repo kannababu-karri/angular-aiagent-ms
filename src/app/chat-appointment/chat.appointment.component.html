@@ -1,0 +1,46 @@
+<p class="searchTitle">&nbsp;&nbsp;Doctor Appointment Chatbot: Home</p>
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsChatbotSubmit('/login-home')" />
+</p>
+<div class="chat-container">
+    <div *ngFor="let msg of messages">
+        <div [ngClass]="{'user-msg': msg.sender==='user','bot-msg': msg.sender==='bot'}">
+            {{ msg.message }}
+        </div>
+
+        <!-- Specializations -->
+        <div *ngIf="msg.type==='specializations'">
+            <button *ngFor="let spec of msg.options" (click)="selectSpecialization(spec.id)">
+                {{ spec.name }}
+            </button>
+        </div>
+
+        <!-- Doctors -->
+        <div *ngIf="msg.type==='doctors'">
+            <button *ngFor="let doc of msg.options" (click)="selectDoctor(doc.doctorId)">
+                {{ doc.name }} - {{ doc.specializationName }}
+            </button>
+        </div>
+
+        <!-- Slots -->
+        <div *ngIf="msg.type==='slots'">
+            <button *ngFor="let slot of msg.options" (click)="selectSlot(slot)">
+                {{ slot.startTime }} - {{ slot.endTime }}
+            </button>
+        </div>
+    </div>
+    <div class="input-container">
+        <input [(ngModel)]="userInput" placeholder="Type your message..." />
+        <button type="button" (click)="sendMessage()">Send</button>
+        <button (click)="clearChat()">Start Over</button>
+    </div>
+</div>
+
+<style>
+    .chat-container { width: 400px; margin: auto; border: 1px solid #ccc; padding: 10px; height: 500px; overflow-y: auto; }
+    .user-msg { text-align: right; background-color: #e0f7fa; padding: 5px; margin: 5px; border-radius: 5px; }
+    .bot-msg { text-align: left; background-color: #f1f1f1; padding: 5px; margin: 5px; border-radius: 5px; }
+    .input-container { display: flex; margin-top: 10px; }
+    input { flex: 1; padding: 5px; }
+    button { margin-left: 5px; }
+</style>
