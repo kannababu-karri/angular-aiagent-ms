@@ -1,3 +1,7 @@
+<p class="searchTitle">&nbsp;&nbsp;LLM Doctor Appointment Chatbot: Home</p>
+<p>&nbsp;&nbsp;
+    <input type="button" value="Return Home" (click)="jsChatbotSubmit('/login-home')" />
+</p>
 <div class="chat-container">
     <div *ngFor="let msg of messages">
         <!-- USER -->
@@ -35,5 +39,9 @@
     <!-- INPUT -->
     <input [(ngModel)]="userInput" placeholder="Type here..." />
     <button (click)="sendMessage()">Send</button>
-    <button (click)="resetChat()">Restart</button>
+    <button (click)="clearChat()">Restart</button>
+</div>
+<!-- Optional: show spinner -->
+<div *ngIf="isLoading" class="loading-overlay">
+    Processing... Please wait.
 </div>

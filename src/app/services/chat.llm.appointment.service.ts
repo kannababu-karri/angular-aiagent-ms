@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChatMessage, Doctor, Slot, Specialization } from '../models/chat-appointment-message.model';
+import { environment } from '../../environments/environment.prod';
 
 export interface ChatRequest {
     message: string;
@@ -29,11 +30,14 @@ export interface ChatResponse {
     providedIn: 'root'
 })
 export class ChatService {
-    private baseUrl = 'http://127.0.0.1:8004/chat'; // Python FastAPI endpoint
+    //private baseUrl = 'http://127.0.0.1:8005/chat'; // Python FastAPI endpoint
+    private baseUrl = `${environment.apiLlmChatAppointment}`; // Python FastAPI endpoint
 
     constructor(private http: HttpClient) { }
 
     sendMessage(req: ChatRequest): Observable<ChatResponse> {
-        return this.http.post<ChatResponse>(this.baseUrl, req);
+        const token = localStorage.getItem('jwt');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        return this.http.post<ChatResponse>(this.baseUrl, req, { headers });
     }
 }
